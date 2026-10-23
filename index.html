@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Headset Batteries</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#1f63b5">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f3f5f7;--card:#ffffff;--ink:#14202b;--ink2:#4f5d6b;--muted:#87919b;--line:#e3e8ed;--line2:#cfd7df;
+  --accent:#1f63b5;--accent-ink:#ffffff;--accent-soft:#e7f0fb;
+  --warn-bg:#fff6df;--warn-line:#efd894;--warn-ink:#6b4e00;
+  --danger:#a3261f;--danger-bg:#fdecea;--ok:#0f7a3a;
+  --grid:#e8ebee;--axis:#c3c9cf;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--red:#e34948;
+  --shadow:0 1px 2px rgba(16,32,48,.05),0 4px 14px rgba(16,32,48,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1215;--card:#1a1e22;--ink:#eef1f4;--ink2:#b9c2cb;--muted:#8a949e;--line:#2a3036;--line2:#3a424a;
+    --accent:#4a8fe0;--accent-ink:#0b1420;--accent-soft:#1d2b3b;
+    --warn-bg:#2e2611;--warn-line:#5b4a18;--warn-ink:#f3d98a;
+    --danger:#ff8a80;--danger-bg:#3a1d1b;--ok:#4cc27b;
+    --grid:#262b30;--axis:#3d454d;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--red:#e66767;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1215;--card:#1a1e22;--ink:#eef1f4;--ink2:#b9c2cb;--muted:#8a949e;--line:#2a3036;--line2:#3a424a;
+  --accent:#4a8fe0;--accent-ink:#0b1420;--accent-soft:#1d2b3b;
+  --warn-bg:#2e2611;--warn-line:#5b4a18;--warn-ink:#f3d98a;
+  --danger:#ff8a80;--danger-bg:#3a1d1b;--ok:#4cc27b;
+  --grid:#262b30;--axis:#3d454d;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--red:#e66767;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding-block:12px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header.top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:6px 0 10px}
+h1{font-size:1.35rem;margin:0;letter-spacing:-.01em}
+h2{font-size:1.02rem;margin:0 0 10px}
+h3{font-size:.95rem;margin:0}
+.muted{color:var(--muted);font-size:.86rem}
+.ink2{color:var(--ink2)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:6px 0 8px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+nav.tabs button{background:var(--card);color:var(--ink2);border:1px solid var(--line);font-weight:650;padding:10px 4px;border-radius:12px;min-height:44px;font-size:.9rem}
+nav.tabs button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}
+button{font:inherit;cursor:pointer;border-radius:11px;border:0;min-height:44px;padding:10px 14px;font-weight:650}
+.btn{background:var(--accent);color:var(--accent-ink)}
+.btn2{background:var(--accent-soft);color:var(--accent)}
+.btn3{background:transparent;color:var(--ink2);border:1px solid var(--line2)}
+.btnd{background:var(--danger-bg);color:var(--danger)}
+.sm{min-height:34px;padding:6px 10px;font-size:.84rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>.grow{flex:1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions>button{flex:1}
+label.f{display:block;font-size:.84rem;font-weight:650;margin:12px 0 6px;color:var(--ink2)}
+input,select{font:inherit;width:100%;padding:11px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--card);color:var(--ink);min-height:46px}
+input:focus,select:focus,button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:1px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;min-height:0}
+.seg span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;padding:8px;border:1.5px solid var(--line2);border-radius:11px;font-weight:650;font-size:.9rem;color:var(--ink2)}
+.seg input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.seg input:focus-visible+span{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent)}
+.quick{display:flex;gap:6px;margin-top:6px}.quick button{flex:1;min-height:36px;padding:6px;font-size:.82rem;background:var(--accent-soft);color:var(--accent)}
+.dev{display:grid;gap:12px}
+@media(min-width:700px){.dev{grid-template-columns:1fr 1fr}}
+.devcard{margin:0}
+.devhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bname{display:flex;align-items:center;gap:8px;font-size:1.25rem;font-weight:750;margin:10px 0 2px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.big{font-size:2rem;font-weight:780;letter-spacing:-.03em;line-height:1.1}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:10px 0 6px}
+.bar>i{display:block;height:100%;border-radius:6px}
+.est{font-style:italic}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--line);color:var(--ink2);vertical-align:1px;white-space:nowrap}
+.badge.est{background:var(--warn-bg);color:var(--warn-ink);border:1px dashed var(--warn-line);font-style:normal;cursor:pointer}
+.badge.calc{background:var(--accent-soft);color:var(--accent)}
+.badge.cur{background:transparent;border:1px solid var(--line2)}
+.notice{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);border-radius:12px;padding:11px 13px;font-size:.88rem;margin:10px 0}
+.notice b{color:inherit}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:760px){.sum{grid-template-columns:repeat(4,1fr)}}
+.bc{border:1px solid var(--line);border-radius:13px;padding:12px;min-width:0}
+.bc .k{font-size:.74rem;color:var(--muted);margin-top:8px}
+.bc .v{font-weight:720}
+.tablewrap{overflow-x:auto;margin:0 -4px}
+table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
+th{font-size:.74rem;color:var(--muted);font-weight:650}
+td.num,th.num{text-align:right}
+details.card>summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:28px}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"▾";color:var(--muted)}
+details.card[open]>summary::after{content:"▴"}
+.entry{border-bottom:1px solid var(--line);padding:10px 0;display:flex;gap:10px;align-items:flex-start}
+.entry .grow{flex:1;min-width:0}
+.entry .t{font-weight:650}
+.entry .d{font-size:.84rem;color:var(--ink2)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink2);margin-top:6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.chartbox{position:relative}
+#chart svg{display:block;width:100%;height:auto;overflow:visible}
+#chart text{font:11px system-ui,-apple-system,"Segoe UI",sans-serif;fill:var(--muted)}
+#chart text.lbl{fill:var(--ink2);font-weight:650}
+.tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:7px 9px;font-size:.8rem;box-shadow:0 4px 16px rgba(0,0,0,.12);white-space:nowrap;z-index:3}
+.hidden{display:none!important}
+dialog{border:0;padding:0;border-radius:18px;background:var(--card);color:var(--ink);width:min(560px,calc(100vw - 20px));max-height:calc(100vh - 30px);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(10,16,24,.45)}
+dialog .dbody{padding:18px;overflow:auto;max-height:calc(100vh - 30px)}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.9rem;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.88rem}
+.kv dt{color:var(--muted)}.kv dd{margin:0;font-weight:600}
+.preview h3{margin:14px 0 6px}
+.list{margin:4px 0 0;padding-left:18px;font-size:.86rem}
+.syncbtn{background:transparent;color:var(--muted);font-weight:600;font-size:.8rem;min-height:32px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.syncbtn::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.syncbtn[data-state="ok"]::before{background:var(--ok)}
+.syncbtn[data-state="wait"]::before{background:var(--warn-line)}
+.syncbtn[data-state="busy"]::before{background:var(--accent)}
+#syncNotice{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>Headset Batteries</h1>
+  <button class="syncbtn" id="syncBtn" type="button" title="Sync now"></button>
+</header>
+<nav class="tabs" id="tabs">
+  <button data-tab="home" class="on">Home</button>
+  <button data-tab="results">Results</button>
+  <button data-tab="logbook">Logbook</button>
+  <button data-tab="log">Log</button>
+</nav>
+
+<!-- HOME -->
+<section id="tab-home">
+  <div class="notice hidden" id="syncNotice">Sync isn't set up on this device yet. <button class="btn2 sm" type="button" id="syncSetupLink">Set up sync</button></div>
+  <div class="dev" id="devices"></div>
+  <div id="homeNotices"></div>
+
+  <details class="card" id="manualBox">
+    <summary>Add flight time (not yet in logbook)</summary>
+    <p class="muted">Use this only for days your logbook export doesn't have yet. When you import a newer logbook, these entries are replaced by the logbook figure for that date.</p>
+    <label class="f">Aircraft</label>
+    <div class="seg">
+      <label><input type="radio" name="mAc" value="AW139" checked><span>AW139</span></label>
+      <label><input type="radio" name="mAc" value="B412"><span>Bell 412</span></label>
+    </div>
+    <label class="f" for="mDate">Date</label>
+    <input type="date" id="mDate">
+    <div class="quick" data-for="mDate"><button type="button" data-off="0">Today</button><button type="button" data-off="-1">Yesterday</button><button type="button" data-off="-2">2 days ago</button></div>
+    <label class="f" for="mTime">Flight time (H:MM or decimal)</label>
+    <input id="mTime" inputmode="decimal" placeholder="e.g. 2:35 or 2.6" autocomplete="off">
+    <div class="actions"><button class="btn" id="mSave">Add flight time</button></div>
+  </details>
+
+  <details class="card" id="otherBox">
+    <summary>Other battery events</summary>
+    <p class="muted">For one of the batteries currently fitted. Most days you only need “Battery changed” above.</p>
+    <label class="f">Event</label>
+    <div class="seg" id="oKindSeg">
+      <label><input type="radio" name="oKind" value="adjust" checked><span>± Adjust</span></label>
+      <label><input type="radio" name="oKind" value="died"><span>Died</span></label>
+      <label><input type="radio" name="oKind" value="fitted"><span>Full / new cycle</span></label>
+    </div>
+    <label class="f">Battery</label>
+    <div class="seg" id="oBatt"></div>
+    <label class="f" for="oDate">Date</label>
+    <input type="date" id="oDate">
+    <div class="quick" data-for="oDate"><button type="button" data-off="0">Today</button><button type="button" data-off="-1">Yesterday</button><button type="button" data-off="-7">7 days ago</button></div>
+    <div id="oAdjWrap"><label class="f" for="oAdj">Adjustment (+/− H:MM)</label><input id="oAdj" placeholder="e.g. -0:50 or +0:20" autocomplete="off"></div>
+    <div id="oDiedWrap" class="hidden"><label class="f" for="oDiedShare">Time flown on it that day before it died (H:MM, blank = all of that day)</label><input id="oDiedShare" placeholder="blank = whole day" autocomplete="off"></div>
+    <p class="muted" id="oHint"></p>
+    <label class="f" for="oNote">Note (optional)</label><input id="oNote" autocomplete="off">
+    <div class="actions"><button class="btn" id="oSave">Save event</button></div>
+  </details>
+</section>
+
+<!-- RESULTS -->
+<section id="tab-results" class="hidden">
+  <div class="card"><h2>Batteries</h2><div class="sum" id="summary"></div>
+    <p class="muted" style="margin:10px 0 0">“Likely to die around” = average completed cycle minus hours so far, spread over your recent flying rate in that aircraft type (last 60 days). It's a rough estimate.</p></div>
+  <div class="card"><h2>Hours per cycle</h2>
+    <div class="chartbox"><div id="chart"></div><div class="tip hidden" id="tip"></div></div>
+    <div class="legend" id="legend"></div>
+    <p class="muted" style="margin:8px 0 0">Each point is one battery cycle, placed on the date it died. Hollow points at “today” = current cycle so far.</p>
+  </div>
+  <div class="card"><h2>All cycles</h2>
+    <p class="muted" style="margin-top:0">Older cycles use the hours from your notes on the date each battery died. Newer cycles are calculated from your logbook between the fitted and died dates.</p>
+    <div class="tablewrap"><table><thead><tr><th>Battery</th><th>Fitted</th><th>Died</th><th class="num">Hours</th><th>Hours from</th></tr></thead><tbody id="cycles"></tbody></table></div>
+  </div>
+</section>
+
+<!-- LOGBOOK -->
+<section id="tab-logbook" class="hidden">
+  <div class="card"><h2>MyFlightbook logbook</h2>
+    <div id="logStatus" class="ink2"></div>
+    <p class="muted">Import your full MyFlightbook CSV export. Only AW139 (A139) and Bell 412 (B412) rows are used; each day's flights are added up per aircraft. Re-importing a newer export replaces the days it covers, so nothing is double-counted.</p>
+    <div class="actions"><button class="btn" id="lbPick">Import logbook CSV…</button></div>
+    <input type="file" id="lbFile" accept=".csv,text/csv" class="hidden">
+    <div id="lbPreview" class="preview"></div>
+  </div>
+  <div class="card"><h2>Recent flying days</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th class="num">AW139</th><th class="num">412</th><th class="num">Headset</th><th>Source</th></tr></thead><tbody id="recentDays"></tbody></table></div></div>
+</section>
+
+<!-- LOG -->
+<section id="tab-log" class="hidden">
+  <div class="card"><h2>Activity log</h2><p class="muted" style="margin-top:0">Battery events, adjustments, manual flight entries and the history from your notes. Logbook days are on the Logbook tab.</p><div id="log"></div></div>
+  <div class="card" id="syncCard"><h2>Sync</h2>
+    <p class="ink2" id="syncState" style="margin-top:0"></p>
+    <p class="muted">Links this device to your Google Sheet. Paste the web app address from Apps Script and your passphrase. Both stay in this browser only.</p>
+    <label class="f" for="syncUrl">Script web app URL</label>
+    <input id="syncUrl" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec">
+    <label class="f" for="syncPass">Passphrase</label>
+    <input id="syncPass" type="password" autocomplete="off" placeholder="The passphrase you set in the script">
+    <div class="actions"><button class="btn" id="syncSave">Save and sync</button></div>
+    <div class="actions"><button class="btn3" id="syncNowBtn">Sync now</button><button class="btn3" id="syncOff">Turn off on this device</button></div>
+  </div>
+  <div class="card"><h2>Backup &amp; restore</h2>
+    <p class="muted" style="margin-top:0">Export saves a file to your Downloads. Import adds a backup's entries to what's here, keeping whichever copy of each entry is newer. It reads exports from the claude.ai version and the earlier versions of this app.</p>
+    <div class="actions"><button class="btn2" id="expJson">Export JSON</button><button class="btn2" id="expCsv">Export CSV</button></div>
+    <div class="actions"><button class="btn3" id="impBtn">Import backup (JSON or CSV)…</button></div>
+    <input type="file" id="impFile" accept=".json,.csv,application/json,text/csv" class="hidden">
+  </div>
+</section>
+</div>
+
+<dialog id="dlg"><div class="dbody" id="dlgBody"></div></dialog>
+<dialog id="ask" style="width:min(420px,calc(100vw - 32px))"><div class="dbody"><p id="askMsg" style="margin:0;white-space:pre-line"></p>
+  <div class="actions"><button class="btn3" id="askCancel">Cancel</button><button class="btn" id="askOk">OK</button></div></div></dialog>
+
+<script>
+"use strict";
+/* =====================================================================
+   DATA LAYER
+   Everything the app knows lives in one flat list of records:
+     { id, type, ...fields, createdAt, updatedAt, deleted }
+   Records are never removed, only marked deleted, so deletions sync too.
+
+   Local first: every change is saved in this browser at once and its id
+   goes into an outbox. Sync sends the outbox to your Google Sheet (an
+   Apps Script web app) and brings back whatever other devices changed
+   since this device last synced. When one record was changed in two
+   places, the newer updatedAt wins.
+   The sync URL and passphrase are kept in this browser only.
+   ===================================================================== */
+const Store = {
+  KEY: "headsetBatteryTracker.v3",
+  SYNC_KEY: "headsetBatteryTracker.sync",
+  sync: { url:"", pass:"", cursor:0, lastSync:null, outbox:[] },
+  busy: false, again: false, error: null, timer: null,
+  onStatus: null,   // sync state changed
+  onRemote: null,   // another device's changes were merged in
+
+  localLoad(){ try{ const raw = localStorage.getItem(this.KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; } },
+  localSave(s){ try{ localStorage.setItem(this.KEY, JSON.stringify(s)); return true; }catch(e){ return false; } },
+  loadSync(){ try{ const raw = localStorage.getItem(this.SYNC_KEY); if(raw) this.sync = { ...this.sync, ...JSON.parse(raw) }; }catch(e){} },
+  saveSync(){ try{ localStorage.setItem(this.SYNC_KEY, JSON.stringify(this.sync)); }catch(e){} },
+  get configured(){ return !!(this.sync.url && this.sync.pass); },
+
+  async load(){ this.loadSync(); return this.localLoad(); },
+  async save(s){ const ok = this.localSave(s); this.saveSync(); this.soon(); return ok; },
+  markDirty(id){ if(!this.sync.outbox.includes(id)) this.sync.outbox.push(id); },
+  soon(ms=800){ clearTimeout(this.timer); if(this.configured) this.timer = setTimeout(() => this.syncNow(), ms); },
+
+  async call(body, url=this.sync.url, pass=this.sync.pass){
+    // text/plain keeps this a "simple" request: no CORS preflight, which Apps Script can't answer
+    const res = await fetch(url, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body:JSON.stringify({ pass, ...body }), redirect:"follow" });
+    if(!res.ok) throw Error("The sync server replied " + res.status + ".");
+    let out;
+    try{ out = await res.json(); }catch(e){ throw Error("That address didn't answer like the battery sync script. Check it's the web app URL ending in /exec."); }
+    if(!out.ok) throw Error(out.error || "The sync script refused the request.");
+    return out;
+  },
+
+  // Send the outbox and bring back other devices' changes
+  async syncNow(){
+    if(!this.configured) return false;
+    if(this.busy){ this.again = true; return false; }
+    this.busy = true; this.error = null; this.onStatus?.();
+    let changed = false;
+    try{
+      do{
+        this.again = false;
+        const sent = this.sync.outbox.map(id => getRec(id)).filter(Boolean).map(r => ({ ...r }));
+        const out = await this.call({ op:"sync", since:this.sync.cursor || 0, records:sent });
+        // Clear what was sent, unless it changed again while the request was out
+        const sentAt = new Map(sent.map(r => [r.id, r.updatedAt]));
+        this.sync.outbox = this.sync.outbox.filter(id => { const r = getRec(id); return r && (!sentAt.has(id) || r.updatedAt !== sentAt.get(id)); });
+        if(mergeRecords(out.records || []).length) changed = true;
+        this.sync.cursor = out.cursor || this.sync.cursor;
+        this.sync.lastSync = nowISO();
+        this.localSave(state); this.saveSync();
+      }while(this.again);
+    }catch(e){
+      this.error = navigator.onLine === false || e instanceof TypeError ? "offline" : (e.message || "Sync failed.");
+    }finally{
+      this.busy = false;
+    }
+    this.onStatus?.();
+    if(changed) this.onRemote?.();
+    return changed;
+  },
+
+  statusText(){
+    if(!this.configured) return "Sync off";
+    if(this.busy) return "Syncing…";
+    const n = this.sync.outbox.length, waiting = n ? `${n} change${n === 1 ? "" : "s"} waiting to send` : "";
+    if(this.error === "offline") return "Offline" + (waiting ? " · " + waiting : "");
+    if(this.error) return "Sync problem" + (waiting ? " · " + waiting : "");
+    if(waiting) return waiting;
+    if(!this.sync.lastSync) return "Not synced yet";
+    const d = new Date(this.sync.lastSync), t = pad(d.getHours()) + ":" + pad(d.getMinutes());
+    const day = d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
+    return "Synced " + (day === todayStr() ? t : dl(day, false) + " " + t);
+  }
+};
+
+let state = null; // { schema:3, records:[...] }
+const nowISO = () => new Date().toISOString();
+function uid(){
+  try{ if(window.crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){}
+  return "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+}
+function live(...types){ return state.records.filter(r => !r.deleted && (!types.length || types.includes(r.type))); }
+function getRec(id){ return state.records.find(r => r.id === id); }
+function upsert(rec){
+  const t = nowISO(), i = state.records.findIndex(r => r.id === rec.id);
+  let id = rec.id;
+  if(i >= 0) state.records[i] = { ...state.records[i], ...rec, deleted:false, updatedAt:t };
+  else { id = rec.id || uid(); state.records.push({ createdAt:t, ...rec, id, updatedAt:t, deleted:false }); }
+  Store.markDirty(id);
+}
+function removeRec(id){ const r = getRec(id); if(r){ r.deleted = true; r.updatedAt = nowISO(); Store.markDirty(id); } }
+/* Bring in records from another device or a backup: per record, the newer updatedAt wins */
+function mergeRecords(incoming){
+  const index = new Map(state.records.map((r, i) => [r.id, i])), changed = [];
+  normalizeIds(incoming).forEach(r => {
+    if(!r || !r.id || !r.type) return;
+    const i = index.get(r.id);
+    if(i == null){ index.set(r.id, state.records.length); state.records.push(r); changed.push(r.id); }
+    else if((r.updatedAt || "") > (state.records[i].updatedAt || "")){ state.records[i] = r; changed.push(r.id); }
+  });
+  return changed;
+}
+async function commit(msg){
+  render();
+  if(msg) toast(msg);
+  if(!await Store.save(state)) toast("Couldn't save to this browser's storage — export a backup to keep changes.");
+  renderSyncStatus();
+}
+
+/* ===================== FIXED SETUP ===================== */
+const BATTERIES = [
+  { id:"duracell", name:"Duracell",    device:"shared", color:"var(--red)" },
+  { id:"eneloop",  name:"Eneloop",     device:"shared", color:"var(--s4)" },
+  { id:"soshine",  name:"So Shine 9V", device:"b412",   color:"var(--s1)" },
+  { id:"liion",    name:"Li-ion 9V",   device:"b412",   color:"var(--s3)" }
+];
+const DEVICES = {
+  shared: { name:"Headset",       sub:"AW139 + 412" },
+  b412:   { name:"412 converter", sub:"412 only" }
+};
+const bat = id => BATTERIES.find(b => b.id === id);
+const devOf = id => bat(id)?.device;
+
+/* History from your notes, years corrected (+1). Totals are the official cycle lengths.
+   Ids come from the content and the timestamp is fixed, so every device seeds the
+   same records and a seed never overrides a later edit or deletion from another device. */
+const SEED_TIME = "2026-10-23T00:00:00.000Z";
+const seedId = r => `seed-${r.type}-${r.batteryId}-${r.date}`;
+function seedRecords(){
+  const out = [];
+  const add = (r, id) => out.push({ id:id || seedId(r), source:"notes", createdAt:SEED_TIME, updatedAt:SEED_TIME, deleted:false, notes:"", ...r });
+  const died = (b, date, h, m, extra={}, id) => add({ type:"died", batteryId:b, date, notedMinutes:h == null ? null : h*60+m, oldDayMinutes:null, ...extra }, id);
+  // Restored entry. Its id has a suffix because earlier versions deleted "seed-died-eneloop-2025-11-27".
+  died("eneloop","2025-11-27",35,35,{},"seed-died-eneloop-2025-11-27-restored");
+  died("duracell","2025-12-08",22,40); died("duracell","2026-04-10",18,25);
+  died("duracell","2026-05-15",29,10); died("duracell","2026-06-24",27,0);  died("duracell","2026-08-10",30,50);
+  died("duracell","2026-09-16",29,20);
+  add({ type:"fitted", batteryId:"duracell", date:"2026-10-03" });
+  add({ type:"adjust", batteryId:"duracell", date:"2026-10-21", minutes:50, notes:"+0:50 adjustment from your notes" });
+  died("duracell","2026-10-21",null,0,{ notes:"Total not noted — calculated from logbook" });
+  died("eneloop","2026-02-11",36,0);  died("eneloop","2026-05-05",36,0);
+  died("eneloop","2026-06-14",38,45); died("eneloop","2026-07-28",36,10); died("eneloop","2026-09-03",40,17);
+  died("eneloop","2026-10-02",38,15);
+  add({ type:"fitted", batteryId:"eneloop", date:"2026-10-22" });
+  add({ type:"adjust", batteryId:"eneloop", date:"2026-10-22", minutes:-50, notes:"−0:50 adjustment from your notes" });
+  died("soshine","2026-05-05",14,30); died("soshine","2026-06-16",21,5); died("soshine","2026-07-27",23,15);
+  died("soshine","2026-09-22",21,10);
+  add({ type:"fitted", batteryId:"soshine", date:"2026-10-20" });
+  died("liion","2026-06-27",27,0); died("liion","2026-08-27",36,15);
+  add({ type:"fitted", batteryId:"liion", date:"2026-09-23" });
+  died("liion","2026-10-19",null,0,{ notes:"Total not noted — calculated from logbook" });
+  return out;
+}
+/* Earlier versions numbered the seeds (seed-1, seed-2, …) in two different orders.
+   Give those records their content id instead; where two land on one id, the newer wins. */
+function normalizeIds(records){
+  const byId = new Map();
+  for(const r0 of records){
+    const r = /^seed-\d+$/.test(r0.id) && r0.type && r0.batteryId && r0.date ? { ...r0, id:seedId(r0) } : r0;
+    const have = byId.get(r.id);
+    if(!have || (r.updatedAt || "") > (have.updatedAt || "")) byId.set(r.id, r);
+  }
+  return [...byId.values()];
+}
+/* Add any history seed this device has never seen (a deleted one stays deleted) */
+function ensureSeeds(){
+  const added = [];
+  seedRecords().forEach(s => { if(!getRec(s.id)){ state.records.push(s); added.push(s.id); } });
+  return added;
+}
+
+/* ===================== HELPERS ===================== */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, "0");
+function todayStr(off=0){ const d = new Date(); d.setDate(d.getDate()+off); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+const toUTC = s => Date.UTC(+s.slice(0,4), +s.slice(5,7)-1, +s.slice(8,10));
+const fromUTC = t => new Date(t).toISOString().slice(0,10);
+const addDays = (s, n) => fromUTC(toUTC(s) + n*864e5);
+const dayDiff = (a, b) => Math.round((toUTC(b) - toUTC(a)) / 864e5);
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function dl(s, withYear=true){ if(!s) return "—"; return (+s.slice(8,10)) + " " + MON[+s.slice(5,7)-1] + (withYear ? " " + s.slice(0,4) : ""); }
+const dls = s => s ? (+s.slice(8,10)) + " " + MON[+s.slice(5,7)-1] + " " + s.slice(2,4) : "—";
+function hm(m){ if(m == null || isNaN(m)) return "—"; const s = m < 0 ? "−" : ""; m = Math.abs(Math.round(m)); return s + Math.floor(m/60) + "h" + pad(m%60); }
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+function parseTime(v, allowSign=false){
+  v = String(v).trim().replace(/\s/g, "").replace(/[hH]/, ":").replace(/m$/i, "").replace("−", "-");
+  let sign = 1;
+  if(allowSign && v[0] === "+") v = v.slice(1);
+  else if(allowSign && v[0] === "-"){ sign = -1; v = v.slice(1); }
+  if(/^\d+:\d{1,2}$/.test(v)){ const [h, m] = v.split(":").map(Number); if(m > 59) throw Error("Minutes must be 0–59."); return sign*(h*60+m); }
+  if(/^\d+(\.\d+)?$/.test(v)) return sign*Math.round(Number(v)*60);
+  throw Error("Enter time as H:MM (e.g. 1:45) or decimal hours (e.g. 1.75).");
+}
+let toastTimer;
+function toast(msg){
+  document.querySelectorAll(".toast").forEach(t => t.remove());
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t);
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.remove(), 3800);
+}
+/* In-page message and yes/no prompts (hosted pages block alert/confirm) */
+function say(msg){ return ask(msg, "OK", null); }
+function ask(msg, okLabel="OK", cancelLabel="Cancel"){
+  return new Promise(resolve => {
+    const d = $("ask");
+    $("askMsg").textContent = msg;
+    $("askOk").textContent = okLabel;
+    $("askCancel").textContent = cancelLabel || "";
+    $("askCancel").classList.toggle("hidden", !cancelLabel);
+    const done = v => { d.close(); resolve(v); };
+    $("askOk").onclick = () => done(true);
+    $("askCancel").onclick = () => done(false);
+    d.oncancel = e => { e.preventDefault(); done(false); };
+    if(!d.open) d.showModal();
+  });
+}
+function download(text, name, type){
+  const a = document.createElement("a"), url = URL.createObjectURL(new Blob([text], { type }));
+  a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function parseCSV(text){
+  const rows = []; let row = [], cell = "", q = false;
+  for(let i = 0; i < text.length; i++){
+    const ch = text[i];
+    if(q){ if(ch === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if(ch === '"') q = true;
+    else if(ch === ","){ row.push(cell); cell = ""; }
+    else if(ch === "\n"){ row.push(cell.replace(/\r$/, "")); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if(cell.length || row.length){ row.push(cell.replace(/\r$/, "")); rows.push(row); }
+  if(rows[0] && rows[0][0]) rows[0][0] = rows[0][0].replace(/^﻿/, "");
+  return rows;
+}
+const csvCell = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+
+/* ===================== MODEL (derived, never stored) ===================== */
+let M = null;
+function compute(){
+  const T = todayStr();
+  const logDays = live("logday"), logDates = new Set(logDays.map(r => r.date));
+  const daily = new Map();
+  const add = (date, ac, m, src) => { let d = daily.get(date); if(!d){ d = { AW139:0, B412:0, src:new Set() }; daily.set(date, d); } d[ac] += m; d.src.add(src); };
+  logDays.forEach(r => add(r.date, r.aircraft, r.minutes, "logbook"));
+  live("flight").forEach(r => { if(!logDates.has(r.date)) add(r.date, r.aircraft, r.minutes, "manual"); });
+  const days = [...daily.keys()].sort();
+  const rel = (date, dev) => { const d = daily.get(date); return d ? (dev === "shared" ? d.AW139 + d.B412 : d.B412) : 0; };
+  const meta = getRec("logmeta");
+  const m = { T, daily, days, rel, logDates, hasLog: logDays.length > 0, meta: meta && !meta.deleted ? meta : null };
+  M = m;
+
+  const died = live("died"), adjusts = live("adjust");
+  // How much of a death day went on the battery that died (null/"all" = the whole day)
+  m.oldShare = (d, r) => (d.oldDayMinutes == null || d.oldDayMinutes === "all") ? r : Math.min(d.oldDayMinutes, r);
+  // Minutes on `date` already used by a battery that died that day in the same headset
+  m.takenByOut = (dev, date, exceptId) => {
+    const d = died.find(x => x.date === date && devOf(x.batteryId) === dev && x.id !== exceptId);
+    return d ? m.oldShare(d, rel(date, dev)) : 0;
+  };
+  m.sumCycle = (b, from, to, diedRec) => {
+    const dev = b.device; let total = 0;
+    for(const d of days){
+      if(d < from) continue; if(d > to) break;
+      const r = rel(d, dev); let c = r;
+      if(d === from) c = Math.max(0, r - m.takenByOut(dev, d, diedRec?.id));
+      if(diedRec && d === diedRec.date) c = Math.min(c, m.oldShare(diedRec, r));
+      total += c;
+    }
+    adjusts.filter(a => a.batteryId === b.id && a.date >= from && a.date <= to).forEach(a => total += a.minutes);
+    return total;
+  };
+
+  // Build cycles per battery
+  const cycles = [];
+  for(const b of BATTERIES){
+    const evs = live("fitted", "died").filter(r => r.batteryId === b.id)
+      .sort((a, c) => a.date.localeCompare(c.date) || ((a.type === "died" ? 0 : 1) - (c.type === "died" ? 0 : 1)));
+    let open = null;
+    const mk = (fit, dr, extra={}) => {
+      const cy = { id:(dr || fit).id, battery:b, fitted:fit?.date || null, fittedRec:fit, died:dr?.date || null, diedRec:dr, ...extra };
+      cy.end = dr ? dr.date : (extra.current ? T : extra.endBefore);
+      if(dr && dr.notedMinutes != null){ cy.minutes = dr.notedMinutes; cy.source = "noted"; }
+      else if(fit){ cy.minutes = m.sumCycle(b, fit.date, cy.end, dr); cy.source = extra.current ? "current" : "calculated"; }
+      else { cy.minutes = null; cy.source = "unknown"; }
+      return cy;
+    };
+    for(const e of evs){
+      if(e.type === "fitted"){ if(open) cycles.push(mk(open, null, { noDeath:true, endBefore:addDays(e.date, -1) })); open = e; }
+      else { cycles.push(mk(open, e)); open = null; }
+    }
+    if(open) cycles.push(mk(open, null, { current:true }));
+  }
+  m.cycles = cycles;
+
+  // Per-battery stats
+  const since = addDays(T, -59);
+  const rate = dev => days.filter(d => d >= since && d <= T).reduce((s, d) => s + rel(d, dev), 0) / 60;
+  m.stats = {};
+  for(const b of BATTERIES){
+    const cs = cycles.filter(c => c.battery.id === b.id);
+    // Zero = not updated yet, so left out
+    const done = cs.filter(c => c.died && c.minutes > 0).sort((a, c) => a.died.localeCompare(c.died));
+    const cur = cs.find(c => c.current) || null;
+    const avg = done.length ? done.reduce((s, c) => s + c.minutes, 0) / done.length : null;
+    let dieBy = null, remaining = null;
+    if(cur && avg != null){
+      remaining = avg - cur.minutes; const r = rate(b.device);
+      if(remaining <= 0) dieBy = "overdue";
+      else if(r > 0) dieBy = addDays(T, Math.ceil(remaining / r));
+    }
+    m.stats[b.id] = { done, cur, avg, last:done[done.length-1] || null, dieBy, remaining };
+  }
+  // What is fitted now in each headset
+  m.installed = {};
+  for(const dev of Object.keys(DEVICES)){
+    const opens = cycles.filter(c => c.current && c.battery.device === dev).sort((a, c) => c.fitted.localeCompare(a.fitted));
+    m.installed[dev] = opens[0] || null;
+  }
+  return m;
+}
+
+/* ===================== RENDER ===================== */
+function render(){
+  compute();
+  renderHome(); renderResults(); renderLogbook(); renderLog();
+  renderSyncStatus();
+}
+
+function renderHome(){
+  $("devices").innerHTML = Object.entries(DEVICES).map(([dev, info]) => {
+    const cy = M.installed[dev];
+    if(!cy) return `<div class="card devcard"><div class="devhead"><h3>${info.name}</h3><span class="muted">${info.sub}</span></div>
+      <div class="bname"><span class="ink2">No battery fitted</span></div>
+      <div class="actions"><button class="btn" data-change="${dev}">Fit a battery</button></div></div>`;
+    const st = M.stats[cy.battery.id], pct = st.avg ? Math.min(100, cy.minutes / st.avg * 100) : 0;
+    const die = st.dieBy === "overdue" ? `<span class="est">Past its average — could go any time</span>`
+      : st.dieBy ? `Likely to die around <b>${dl(st.dieBy, false)}</b> <span class="badge est" title="Estimate">estimate</span>` : "";
+    return `<div class="card devcard">
+      <div class="devhead"><h3>${info.name}</h3><span class="muted">${info.sub}</span></div>
+      <div class="bname"><span class="dot" style="background:${cy.battery.color}"></span>${esc(cy.battery.name)}</div>
+      <div class="muted">Fitted ${dl(cy.fitted)}</div>
+      <div style="margin-top:10px"><span class="big">${hm(cy.minutes)}</span> <span class="ink2">so far</span></div>
+      ${st.avg ? `<div class="bar"><i style="width:${pct}%;background:${cy.battery.color}"></i></div><div class="muted">Average cycle ${hm(st.avg)} · ${st.remaining > 0 ? "≈" + hm(st.remaining) + " left" : "at or past average"}</div>` : `<div class="muted" style="margin-top:8px">No completed cycles yet to compare.</div>`}
+      <div style="margin-top:6px;font-size:.9rem">${die}</div>
+      <div class="actions"><button class="btn" data-change="${dev}">Battery changed</button></div>
+    </div>`;
+  }).join("");
+  document.querySelectorAll("[data-change]").forEach(b => b.onclick = () => openChange(b.dataset.change));
+
+  const n = [];
+  if(!M.hasLog) n.push(`<div class="notice"><b>No logbook data yet.</b> Import your MyFlightbook CSV on the Logbook tab — hours so far, calculated totals and estimated fitted dates all come from it.</div>`);
+  else if(M.meta && M.meta.rangeTo < todayStr(-3)) n.push(`<div class="notice">Logbook data runs to ${dl(M.meta.rangeTo)}. Import a newer export, or add recent days below.</div>`);
+  $("homeNotices").innerHTML = n.join("");
+
+  // Other events: battery choices = currently fitted
+  const fitted = Object.values(M.installed).filter(Boolean).map(c => c.battery);
+  const prev = document.querySelector('input[name="oBatt"]:checked')?.value;
+  $("oBatt").innerHTML = fitted.length ? fitted.map((b, i) => `<label><input type="radio" name="oBatt" value="${b.id}" ${(prev ? prev === b.id : i === 0) ? "checked" : ""}><span>${esc(b.name)}</span></label>`).join("") : `<span class="muted">No battery fitted.</span>`;
+  if(fitted.length && !document.querySelector('input[name="oBatt"]:checked')) document.querySelector('input[name="oBatt"]').checked = true;
+  otherFields();
+}
+
+function otherFields(){
+  const k = document.querySelector('input[name="oKind"]:checked').value;
+  $("oAdjWrap").classList.toggle("hidden", k !== "adjust");
+  $("oDiedWrap").classList.toggle("hidden", k !== "died");
+  $("oHint").textContent = k === "adjust" ? "Adds or removes time from this battery's current cycle only."
+    : k === "died" ? "Marks the battery dead without fitting a replacement. Use “Battery changed” if you swapped it."
+    : "Starts a fresh cycle for this battery (e.g. recharged and refitted) without recording a death.";
+}
+
+function renderResults(){
+  $("summary").innerHTML = BATTERIES.map(b => {
+    const st = M.stats[b.id], cur = st.cur;
+    const die = !cur ? "Not fitted" : st.dieBy === "overdue" ? "Past average" : st.dieBy ? "≈ " + dl(st.dieBy) : "—";
+    return `<div class="bc">
+      <h3 style="display:flex;align-items:center;gap:7px"><span class="dot" style="background:${b.color}"></span>${esc(b.name)}</h3>
+      <div class="k">Current cycle</div><div class="v">${cur ? hm(cur.minutes) + ` <span class="muted">since ${dl(cur.fitted, false)}</span>` : "—"}</div>
+      <div class="k">Last completed</div><div class="v">${st.last ? hm(st.last.minutes) + ` <span class="muted">${dl(st.last.died, false)}</span>` : "—"}</div>
+      <div class="k">Average (${st.done.length} cycle${st.done.length === 1 ? "" : "s"})</div><div class="v">${hm(st.avg)}</div>
+      <div class="k">Likely to die around <span class="badge est" style="cursor:default">est.</span></div><div class="v est">${die}</div>
+    </div>`;
+  }).join("");
+  $("legend").innerHTML = BATTERIES.map(b => `<span><i class="dot" style="background:${b.color}"></i>${esc(b.name)}</span>`).join("");
+  drawChart();
+
+  const rows = [...M.cycles].sort((a, b) => (b.died || b.end || "").localeCompare(a.died || a.end || ""));
+  $("cycles").innerHTML = rows.map(c => {
+    const fit = c.fitted ? dls(c.fitted) : `<span class="muted">—</span>`;
+    const dd = c.died ? dls(c.died) : c.current ? `<span class="badge cur">in use</span>` : `<span class="muted">no death noted</span>`;
+    const src = { noted:`Noted`, calculated:`<span class="badge calc">Calculated</span>`, current:`<span class="badge cur">So far</span>`, unknown:`<span class="muted">—</span>` }[c.source];
+    return `<tr><td><span class="dot" style="background:${c.battery.color};width:9px;height:9px"></span> ${esc(c.battery.name)}</td><td>${fit}</td><td>${dd}</td><td class="num"><b>${hm(c.minutes)}</b></td><td>${src}</td></tr>`;
+  }).join("") || `<tr><td colspan="5" class="muted">No cycles yet.</td></tr>`;
+}
+
+/* ---------- Chart (SVG) ---------- */
+function drawChart(){
+  const box = $("chart"), w = Math.max(300, box.clientWidth || 600), h = w < 500 ? 240 : 290;
+  const series = BATTERIES.map(b => {
+    const st = M.stats[b.id];
+    const pts = st.done.map(c => ({ date:c.died, min:c.minutes, c }));
+    const cur = st.cur && st.cur.minutes > 0 ? { date:M.T, min:st.cur.minutes, c:st.cur, current:true } : null;
+    return { b, pts, cur };
+  });
+  const all = series.flatMap(s => s.pts.concat(s.cur ? [s.cur] : []));
+  if(!all.length){ box.innerHTML = `<p class="muted">Cycle totals will appear here.</p>`; return; }
+  const minD = all.reduce((a, p) => p.date < a ? p.date : a, all[0].date);
+  const x0 = toUTC(minD.slice(0,7) + "-01"), lastMonth = new Date(toUTC(M.T)); lastMonth.setUTCMonth(lastMonth.getUTCMonth() + 1, 1);
+  const x1 = lastMonth.getTime();
+  const L = 36, R = w < 500 ? 64 : 78, Tp = 12, B = 34, pw = w - L - R, ph = h - Tp - B;
+  const maxM = Math.max(600, ...all.map(p => p.min)), yMax = Math.ceil(maxM / 600) * 600;
+  const X = s => L + (toUTC(s) - x0) / (x1 - x0) * pw, Y = m => Tp + ph - m / yMax * ph;
+  let g = "";
+  for(let v = 0; v <= yMax; v += 600){
+    g += `<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(${v ? "--grid" : "--axis"})" stroke-width="1"/>`;
+    g += `<text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v/60}h</text>`;
+  }
+  // Month ticks: one per month, labels thinned only if crowded
+  const months = []; const md = new Date(x0);
+  while(md.getTime() <= x1){ months.push(new Date(md)); md.setUTCMonth(md.getUTCMonth() + 1); }
+  const perMonth = pw / Math.max(1, months.length - 1), short = perMonth < 30, step = perMonth >= 11 ? 1 : 2;
+  months.forEach((d, i) => {
+    const x = L + (d.getTime() - x0) / (x1 - x0) * pw;
+    g += `<line x1="${x}" x2="${x}" y1="${Tp+ph}" y2="${Tp+ph+4}" stroke="var(--axis)"/>`;
+    if(i % step === 0){
+      const mo = d.getUTCMonth(), yr = String(d.getUTCFullYear()).slice(2);
+      g += `<text x="${x}" y="${Tp+ph+17}" text-anchor="middle">${short ? MON[mo][0] : MON[mo]}</text>`;
+      if(mo === 0 || i === 0) g += `<text x="${x}" y="${Tp+ph+30}" text-anchor="middle">’${yr}</text>`;
+    }
+  });
+  const ty = X(M.T); g += `<line x1="${ty}" x2="${ty}" y1="${Tp}" y2="${Tp+ph}" stroke="var(--axis)" stroke-dasharray="2 3"/><text x="${ty}" y="${Tp-2}" text-anchor="middle">today</text>`;
+  const labels = [];
+  series.forEach(s => {
+    if(!s.pts.length && !s.cur) return;
+    const col = s.b.color;
+    if(s.pts.length > 1) g += `<polyline fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="${s.pts.map(p => X(p.date) + "," + Y(p.min)).join(" ")}"/>`;
+    const last = s.pts[s.pts.length - 1];
+    s.pts.forEach(p => g += `<circle cx="${X(p.date)}" cy="${Y(p.min)}" r="4.5" fill="${col}" stroke="var(--card)" stroke-width="2"/>`);
+    if(s.cur) g += `<circle cx="${X(s.cur.date)}" cy="${Y(s.cur.min)}" r="4.5" fill="var(--card)" stroke="${col}" stroke-width="2"/>`;
+    const end = last || s.cur;
+    labels.push({ y:Y(last ? last.min : s.cur.min), x:X(last ? last.date : s.cur.date), name:s.b.name, col });
+  });
+  // Direct labels at the right edge, nudged apart
+  labels.sort((a, b) => a.y - b.y);
+  for(let i = 1; i < labels.length; i++) if(labels[i].y - labels[i-1].y < 13) labels[i].y = labels[i-1].y + 13;
+  labels.forEach(l => { g += `<text class="lbl" x="${L+pw+8}" y="${l.y+4}">${esc(l.name.replace(" 9V",""))}</text><rect x="${L+pw+2}" y="${l.y-1}" width="4" height="4" rx="2" fill="${l.col}"/>`; });
+  // Hit targets
+  let hits = "";
+  series.forEach(s => s.pts.concat(s.cur ? [s.cur] : []).forEach(p => {
+    hits += `<circle cx="${X(p.date)}" cy="${Y(p.min)}" r="11" fill="transparent" data-tip="${esc(s.b.name)}|${p.current ? "So far (fitted " + dl(p.c.fitted) + ")" : "Died " + dl(p.date)}|${hm(p.min)}|${p.current ? "" : p.c.source === "noted" ? "noted" : "calculated"}" style="cursor:pointer"/>`;
+  }));
+  box.innerHTML = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="Line chart of hours per battery cycle">${g}${hits}</svg>`;
+  const tip = $("tip");
+  box.querySelectorAll("[data-tip]").forEach(c => {
+    const show = () => {
+      const [n, d, v, s] = c.dataset.tip.split("|");
+      tip.innerHTML = `<b>${n}</b><br>${d}<br><b>${v}</b> ${s ? `<span class="muted">${s}</span>` : ""}`;
+      tip.classList.remove("hidden");
+      const cx = +c.getAttribute("cx"), cy = +c.getAttribute("cy");
+      tip.style.left = Math.min(Math.max(0, cx - tip.offsetWidth / 2), w - tip.offsetWidth) + "px";
+      tip.style.top = Math.max(0, cy - tip.offsetHeight - 12) + "px";
+    };
+    c.addEventListener("pointerenter", show); c.addEventListener("click", show);
+    c.addEventListener("pointerleave", () => tip.classList.add("hidden"));
+  });
+}
+
+function renderLogbook(){
+  const ld = live("logday");
+  if(!ld.length){ $("logStatus").innerHTML = `<p>No logbook imported yet.</p>`; }
+  else {
+    const tot = ac => ld.filter(r => r.aircraft === ac).reduce((s, r) => s + r.minutes, 0);
+    $("logStatus").innerHTML = `<dl class="kv"><dt>Covers</dt><dd>${dl(M.meta?.rangeFrom)} → ${dl(M.meta?.rangeTo)}</dd>
+      <dt>Flying days</dt><dd>${new Set(ld.map(r => r.date)).size}</dd>
+      <dt>AW139</dt><dd>${hm(tot("AW139"))}</dd><dt>Bell 412</dt><dd>${hm(tot("B412"))}</dd>
+      <dt>Imported</dt><dd>${M.meta ? new Date(M.meta.importedAt).toLocaleString() : "—"}${M.meta?.fileName ? " · " + esc(M.meta.fileName) : ""}</dd></dl>`;
+  }
+  const recent = M.days.slice(-21).reverse();
+  $("recentDays").innerHTML = recent.map(d => { const x = M.daily.get(d); return `<tr><td>${dl(d)}</td><td class="num">${x.AW139 ? hm(x.AW139) : ""}</td><td class="num">${x.B412 ? hm(x.B412) : ""}</td><td class="num">${hm(x.AW139 + x.B412)}</td><td>${[...x.src].join(", ")}</td></tr>`; }).join("") || `<tr><td colspan="5" class="muted">No flying recorded.</td></tr>`;
+}
+
+function renderLog(){
+  const recs = live("fitted", "died", "adjust", "flight");
+  const items = [], groups = {};
+  recs.forEach(r => { if(r.changeId){ (groups[r.changeId] = groups[r.changeId] || []).push(r); } else items.push({ date:r.date, recs:[r], t:r.createdAt }); });
+  Object.values(groups).forEach(g => items.push({ date:g[0].date, recs:g, t:g[0].createdAt }));
+  items.sort((a, b) => b.date.localeCompare(a.date) || (b.t || "").localeCompare(a.t || ""));
+  $("log").innerHTML = items.map(it => {
+    let title, detail = "";
+    const r = it.recs[0];
+    if(it.recs.length > 1 || r.changeId){
+      const out = it.recs.find(x => x.type === "died"), inn = it.recs.find(x => x.type === "fitted");
+      title = `Battery changed: ${out ? esc(bat(out.batteryId).name) : "—"} → ${inn ? esc(bat(inn.batteryId).name) : "—"}`;
+      if(out) detail = out.oldDayMinutes === "all" ? "Whole day on old battery" : out.oldDayMinutes ? `${hm(out.oldDayMinutes)} of that day on old battery` : "Changed before flying";
+    } else if(r.type === "flight"){ title = `Flight time · ${r.aircraft === "B412" ? "Bell 412" : "AW139"} ${hm(r.minutes)}`; detail = "Manual entry"; }
+    else if(r.type === "adjust"){ title = `Adjustment · ${esc(bat(r.batteryId).name)} ${r.minutes > 0 ? "+" : ""}${hm(r.minutes)}`; }
+    else if(r.type === "died"){ title = `Battery died · ${esc(bat(r.batteryId).name)}`; detail = r.notedMinutes != null ? `Noted total ${hm(r.notedMinutes)}` : ""; }
+    else { title = `Battery fitted / full · ${esc(bat(r.batteryId).name)}`; }
+    const notes = it.recs.map(x => x.notes).filter(Boolean).join(" · ");
+    const src = r.source === "notes" ? `<span class="badge">from your notes</span> ` : "";
+    return `<div class="entry"><div class="grow"><div class="t">${title}</div><div class="d">${dl(it.date)} ${src}${detail ? "· " + esc(detail) : ""}${notes ? " · " + esc(notes) : ""}</div></div>
+      <button class="btnd sm" data-del="${it.recs.map(x => x.id).join(",")}">Delete</button></div>`;
+  }).join("") || `<p class="muted">No entries yet.</p>`;
+  document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    if(!await ask("Delete this entry? Totals recalculate.", "Delete")) return;
+    b.dataset.del.split(",").forEach(removeRec); commit("Deleted.");
+  });
+}
+function renderSyncStatus(){
+  const txt = Store.statusText(), b = $("syncBtn");
+  b.textContent = txt;
+  b.dataset.state = !Store.configured ? "off" : Store.busy ? "busy" : (Store.error || Store.sync.outbox.length) ? "wait" : "ok";
+  $("syncState").textContent = !Store.configured
+    ? "Sync isn't set up on this device. Changes are saved in this browser only."
+    : txt + (Store.error && Store.error !== "offline" ? " — " + Store.error : "") + (Store.sync.lastSync ? ` (last synced ${new Date(Store.sync.lastSync).toLocaleString()})` : "");
+  $("syncNotice").classList.toggle("hidden", Store.configured);
+}
+
+/* ===================== DIALOG ===================== */
+function openDialog(html){
+  const d = $("dlg"); $("dlgBody").innerHTML = html;
+  d.querySelectorAll("[data-close]").forEach(b => b.onclick = () => d.close());
+  if(!d.open) d.showModal();
+}
+$("dlg").addEventListener("click", e => { if(e.target === $("dlg")) $("dlg").close(); });
+
+/* ---------- Battery changed ---------- */
+function openChange(dev){
+  const cur = M.installed[dev], outB = cur?.battery;
+  const options = BATTERIES.filter(b => b.device === dev);
+  const def = options.find(b => b.id !== outB?.id) || options[0];
+  openDialog(`<h2>${outB ? "Battery changed" : "Fit a battery"} — ${DEVICES[dev].name}</h2>
+    ${outB ? `<p class="ink2" style="margin:0">Coming out: <b><span class="dot" style="background:${outB.color}"></span> ${esc(outB.name)}</b> (fitted ${dl(cur.fitted)}, ${hm(cur.minutes)} so far)</p>` : ""}
+    ${outB ? `<p class="ink2" style="margin:6px 0 0">Going in: <b><span class="dot" style="background:${def.color}"></span> ${esc(def.name)}</b></p>
+    <input type="radio" name="cIn" value="${def.id}" checked class="hidden">`
+    : `<label class="f">Going in</label>
+    <div class="seg">${options.map(b => `<label><input type="radio" name="cIn" value="${b.id}" ${b.id === def.id ? "checked" : ""}><span>${esc(b.name)}</span></label>`).join("")}</div>`}
+    <label class="f" for="cDate">Date</label><input type="date" id="cDate" value="${M.T}">
+    <div class="quick" data-for="cDate"><button type="button" data-off="0">Today</button><button type="button" data-off="-1">Yesterday</button><button type="button" data-off="-2">2 days ago</button></div>
+    ${outB ? `<label class="f">Flying on that day</label>
+    <div class="seg" style="grid-auto-flow:row;grid-auto-columns:auto">
+      <label><input type="radio" name="cSplit" value="before" checked><span>Changed before flying — whole day on the new battery</span></label>
+      <label><input type="radio" name="cSplit" value="split"><span>Part-day split</span></label>
+      <label><input type="radio" name="cSplit" value="after"><span>Changed after flying — whole day on the old battery</span></label>
+    </div>
+    <div id="cSplitWrap" class="hidden"><label class="f" for="cSplitMin">Roughly how much of that day went on ${esc(outB.name)}? (H:MM)</label><input id="cSplitMin" placeholder="e.g. 0:50" autocomplete="off"></div>
+    <p class="muted" id="cDayInfo"></p>` : ""}
+    <label class="f" for="cNote">Note (optional)</label><input id="cNote" autocomplete="off">
+    <div class="actions"><button class="btn3" data-close>Cancel</button><button class="btn" id="cSave">Save</button></div>`);
+  bindQuick($("dlgBody"));
+  const info = () => {
+    if(!outB) return;
+    const mode = document.querySelector('input[name="cSplit"]:checked').value, date = $("cDate").value;
+    $("cSplitWrap").classList.toggle("hidden", mode !== "split");
+    const r = M.rel(date, dev), known = M.daily.has(date);
+    let txt = known || M.logDates.has(date) ? `${DEVICES[dev].name} flew ${hm(r)} on ${dl(date)}.` : `No flying recorded yet for ${dl(date)} — the split applies when that day's time arrives.`;
+    if(mode === "split"){ try{ const s = parseTime($("cSplitMin").value); if(known) txt += ` ${esc(outB.name)} gets ${hm(Math.min(s, r))}, new battery gets ${hm(Math.max(0, r - s))}.`; }catch(e){} }
+    $("cDayInfo").textContent = txt;
+  };
+  document.querySelectorAll('input[name="cSplit"]').forEach(r => r.onchange = info);
+  if(outB){ $("cDate").oninput = info; $("cSplitMin").oninput = info; info(); }
+  $("cSave").onclick = () => {
+    const date = $("cDate").value, inId = document.querySelector('input[name="cIn"]:checked').value, note = $("cNote").value.trim();
+    if(!date){ say("Choose a date."); return; }
+    if(outB && date < cur.fitted){ say(`That's before ${outB.name} was fitted (${dl(cur.fitted)}).`); return; }
+    let share = 0;
+    if(outB){
+      const mode = document.querySelector('input[name="cSplit"]:checked').value;
+      if(mode === "after") share = "all";
+      if(mode === "split"){ try{ share = parseTime($("cSplitMin").value); }catch(e){ say(e.message); return; } }
+    }
+    const changeId = uid();
+    if(outB) upsert({ type:"died", batteryId:outB.id, date, notedMinutes:null, oldDayMinutes:share, changeId, source:"app", notes:note });
+    upsert({ type:"fitted", batteryId:inId, date, changeId, source:"app", notes:outB ? "" : note });
+    $("dlg").close();
+    commit(outB ? `${outB.name} out, ${bat(inId).name} in.` : `${bat(inId).name} fitted.`);
+  };
+}
+
+function bindQuick(root){
+  root.querySelectorAll(".quick").forEach(q => q.querySelectorAll("button").forEach(b => b.onclick = () => {
+    const inp = $(q.dataset.for); inp.value = todayStr(+b.dataset.off); inp.dispatchEvent(new Event("input"));
+  }));
+}
+
+/* ---------- Manual flight ---------- */
+$("mSave").onclick = () => {
+  const date = $("mDate").value, ac = document.querySelector('input[name="mAc"]:checked').value;
+  if(!date){ say("Choose a date."); return; }
+  if(M.logDates.has(date)){ say(`Your logbook already has ${dl(date)} — that figure is used instead. Import a newer logbook if it changed.`); return; }
+  let m; try{ m = parseTime($("mTime").value); }catch(e){ say(e.message); return; }
+  if(m <= 0){ say("Flight time must be more than zero."); return; }
+  upsert({ type:"flight", date, aircraft:ac, minutes:m, source:"manual", notes:"" });
+  $("mTime").value = "";
+  commit(`Added ${hm(m)} ${ac === "B412" ? "Bell 412" : "AW139"} on ${dl(date)}.`);
+};
+
+/* ---------- Other events ---------- */
+document.querySelectorAll('input[name="oKind"]').forEach(r => r.onchange = otherFields);
+$("oSave").onclick = () => {
+  const k = document.querySelector('input[name="oKind"]:checked').value, bid = document.querySelector('input[name="oBatt"]:checked')?.value, date = $("oDate").value, note = $("oNote").value.trim();
+  if(!bid){ say("No battery fitted."); return; }
+  if(!date){ say("Choose a date."); return; }
+  const cur = M.cycles.find(c => c.current && c.battery.id === bid);
+  if(k !== "fitted" && cur && date < cur.fitted){ say(`That's before ${bat(bid).name} was fitted (${dl(cur.fitted)}).`); return; }
+  try{
+    if(k === "adjust"){ const m = parseTime($("oAdj").value, true); if(!m) throw Error("Enter a non-zero adjustment."); upsert({ type:"adjust", batteryId:bid, date, minutes:m, source:"app", notes:note }); $("oAdj").value = ""; }
+    if(k === "died"){ const v = $("oDiedShare").value.trim(); upsert({ type:"died", batteryId:bid, date, notedMinutes:null, oldDayMinutes:v ? parseTime(v) : "all", source:"app", notes:note }); $("oDiedShare").value = ""; }
+    if(k === "fitted") upsert({ type:"fitted", batteryId:bid, date, source:"app", notes:note });
+  }catch(e){ say(e.message); return; }
+  $("oNote").value = "";
+  commit("Saved.");
+};
+
+/* ===================== LOGBOOK IMPORT ===================== */
+let pendingImport = null;
+$("lbPick").onclick = () => $("lbFile").click();
+$("lbFile").onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ""; if(!f) return;
+  try{ pendingImport = parseLogbook(await f.text(), f.name); showPreview(); }
+  catch(err){ $("lbPreview").innerHTML = `<div class="notice">${esc(err.message)}</div>`; }
+};
+function parseLogbook(text, fileName){
+  const rows = parseCSV(text); if(!rows.length) throw Error("The file is empty.");
+  const h = rows[0].map(s => s.trim());
+  const iDate = h.indexOf("Date") >= 0 ? h.indexOf("Date") : 0;
+  const iAc = h.indexOf("ICAO Model") >= 0 ? h.indexOf("ICAO Model") : 3;
+  const iT = h.indexOf("Total Flight Time (HH:MM)") >= 0 ? h.indexOf("Total Flight Time (HH:MM)") : 26;
+  const iDec = h.indexOf("Total Flight Time");
+  if(h[iDate] !== "Date" || h.indexOf("ICAO Model") < 0) throw Error("This doesn't look like a MyFlightbook export (no “Date” / “ICAO Model” columns).");
+  const MAP = { A139:"AW139", B412:"B412" };
+  const agg = new Map(); let used = 0, other = 0, minD = null, maxD = null;
+  for(let i = 1; i < rows.length; i++){
+    const r = rows[i]; const date = (r[iDate] || "").trim();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+    if(!minD || date < minD) minD = date; if(!maxD || date > maxD) maxD = date;
+    const ac = MAP[(r[iAc] || "").trim()]; if(!ac){ other++; continue; }
+    let m = 0; const t = (r[iT] || "").trim();
+    if(/^\d+:\d{2}$/.test(t)){ const [a, b] = t.split(":").map(Number); m = a*60 + b; }
+    else if(iDec >= 0 && /^\d+(\.\d+)?$/.test((r[iDec] || "").trim())) m = Math.round(Number(r[iDec]) * 60);
+    if(!m) continue;
+    used++;
+    const k = date + "|" + ac, x = agg.get(k) || { date, aircraft:ac, minutes:0, flights:0 };
+    x.minutes += m; x.flights++; agg.set(k, x);
+  }
+  if(!minD) throw Error("No dated rows found in this file.");
+  return { fileName, days:[...agg.values()], used, other, rangeFrom:minD, rangeTo:maxD };
+}
+function diffImport(p){
+  const existing = new Map(live("logday").map(r => [r.date + "|" + r.aircraft, r]));
+  const incoming = new Map(p.days.map(d => [d.date + "|" + d.aircraft, d]));
+  const added = [], changed = [], same = [], removed = [];
+  incoming.forEach((d, k) => { const e = existing.get(k); if(!e) added.push(d); else if(e.minutes !== d.minutes) changed.push({ d, old:e.minutes }); else same.push(d); });
+  existing.forEach((e, k) => { if(e.date >= p.rangeFrom && e.date <= p.rangeTo && !incoming.has(k)) removed.push(e); });
+  const newDates = new Set(p.days.map(d => d.date));
+  const manual = live("flight");
+  const replaced = manual.filter(f => newDates.has(f.date));
+  const orphan = manual.filter(f => !newDates.has(f.date) && f.date >= p.rangeFrom && f.date <= p.rangeTo);
+  return { added, changed, same, removed, replaced, orphan };
+}
+function showPreview(){
+  const p = pendingImport, d = diffImport(p);
+  const tot = ac => p.days.filter(x => x.aircraft === ac).reduce((s, x) => s + x.minutes, 0);
+  const li = (arr, fn, max=12) => `<ul class="list">${arr.slice(0, max).map(fn).join("")}${arr.length > max ? `<li>…and ${arr.length - max} more</li>` : ""}</ul>`;
+  const acn = a => a === "B412" ? "412" : "AW139";
+  $("lbPreview").innerHTML = `<div class="card" style="margin:14px 0 0;background:var(--bg)">
+    <h2>Preview — ${esc(p.fileName)}</h2>
+    <dl class="kv"><dt>File covers</dt><dd>${dl(p.rangeFrom)} → ${dl(p.rangeTo)}</dd>
+      <dt>Rows used</dt><dd>${p.used} AW139/412 flights → ${new Set(p.days.map(x => x.date)).size} flying days</dd>
+      <dt>Ignored</dt><dd>${p.other} rows of other aircraft</dd>
+      <dt>AW139 total</dt><dd>${hm(tot("AW139"))}</dd><dt>412 total</dt><dd>${hm(tot("B412"))}</dd></dl>
+    <h3>Compared with what's stored</h3>
+    <dl class="kv"><dt>New days</dt><dd>${d.added.length}</dd><dt>Changed</dt><dd>${d.changed.length}</dd><dt>Unchanged</dt><dd>${d.same.length}</dd><dt>Removed</dt><dd>${d.removed.length}</dd></dl>
+    ${d.changed.length ? `<h3>Changed days</h3>${li(d.changed, c => `<li>${dl(c.d.date)} ${acn(c.d.aircraft)}: ${hm(c.old)} → ${hm(c.d.minutes)}</li>`)}` : ""}
+    ${d.removed.length ? `<h3>No longer in the logbook (will be removed)</h3>${li(d.removed, r => `<li>${dl(r.date)} ${acn(r.aircraft)} ${hm(r.minutes)}</li>`)}` : ""}
+    ${d.replaced.length ? `<div class="notice"><b>Hand-entered hours replaced by the logbook figure:</b>${li(d.replaced, f => `<li>${dl(f.date)} — your entry ${acn(f.aircraft)} ${hm(f.minutes)} → logbook ${p.days.filter(x => x.date === f.date).map(x => acn(x.aircraft) + " " + hm(x.minutes)).join(" + ")}</li>`)}</div>` : ""}
+    ${d.orphan.length ? `<div class="notice"><b>Hand-entered hours on days the logbook shows no AW139/412 flying</b> (kept — check them):${li(d.orphan, f => `<li>${dl(f.date)} ${acn(f.aircraft)} ${hm(f.minutes)}</li>`)}</div>` : ""}
+    <div class="actions"><button class="btn3" id="lbCancel">Cancel</button><button class="btn" id="lbGo">Import</button></div></div>`;
+  $("lbCancel").onclick = () => { pendingImport = null; $("lbPreview").innerHTML = ""; };
+  $("lbGo").onclick = () => applyImport(p, d);
+}
+function applyImport(p, d){
+  d.removed.forEach(r => removeRec(r.id));
+  d.added.concat(d.changed.map(c => c.d)).forEach(x => upsert({ id:`log-${x.date}-${x.aircraft}`, type:"logday", date:x.date, aircraft:x.aircraft, minutes:x.minutes, flights:x.flights, source:"logbook" }));
+  d.replaced.forEach(f => removeRec(f.id));
+  const meta = getRec("logmeta");
+  upsert({ id:"logmeta", type:"logmeta", rangeFrom: meta && !meta.deleted && meta.rangeFrom < p.rangeFrom ? meta.rangeFrom : p.rangeFrom, rangeTo: meta && !meta.deleted && meta.rangeTo > p.rangeTo ? meta.rangeTo : p.rangeTo, importedAt:nowISO(), fileName:p.fileName });
+  pendingImport = null; $("lbPreview").innerHTML = "";
+  commit(`Logbook imported: ${d.added.length} new, ${d.changed.length} changed, ${d.removed.length} removed days.`);
+}
+
+/* ===================== BACKUP ===================== */
+const CSV_COLS = ["id","type","batteryId","date","aircraft","minutes","notedMinutes","oldDayMinutes","flights","changeId","source","notes","rangeFrom","rangeTo","importedAt","fileName","createdAt","updatedAt","deleted"];
+const NUMERIC = ["minutes","notedMinutes","flights"];
+$("expJson").onclick = () => download(JSON.stringify({ app:"headset-battery-tracker", schema:3, exportedAt:nowISO(), records:state.records }, null, 1), `battery-backup-${todayStr()}.json`, "application/json");
+$("expCsv").onclick = () => download([CSV_COLS.map(csvCell).join(",")].concat(state.records.map(r => CSV_COLS.map(c => csvCell(r[c] == null ? "" : r[c])).join(","))).join("\r\n"), `battery-backup-${todayStr()}.csv`, "text/csv;charset=utf-8");
+$("impBtn").onclick = () => $("impFile").click();
+$("impFile").onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ""; if(!f) return;
+  try{
+    const text = await f.text();
+    let recs = null, old = null;
+    if(/^\s*[\[{]/.test(text)){
+      const j = JSON.parse(text);
+      if(j && j.schema === 3 && Array.isArray(j.records)) recs = j.records;
+      else if(j && Array.isArray(j.events) && Array.isArray(j.batteries)) old = j;
+      else throw Error("This JSON isn't a battery tracker backup.");
+    } else {
+      const rows = parseCSV(text), h = rows[0] || [];
+      if(h[0] === "id" && h.includes("type")){
+        recs = rows.slice(1).filter(r => r.length > 1).map(r => { const o = {}; h.forEach((c, i) => { let v = r[i] ?? ""; if(v === "") v = null; else if(NUMERIC.includes(c)) v = Number(v); else if(c === "oldDayMinutes") v = v === "all" ? "all" : Number(v); else if(c === "deleted") v = v === "true"; o[c] = v; }); o.deleted = !!o.deleted; return o; });
+      } else if(h[0] === "recordType") old = oldFromCSV(rows);
+      else throw Error("This CSV isn't a battery tracker backup.");
+    }
+    if(recs){
+      if(!await ask(`Bring in this backup (${recs.filter(r => !r.deleted).length} records)?\n\nEach entry is added, or replaces the one here if the backup's copy is newer. Nothing newer on this device is overwritten.`, "Import")) return;
+      const changed = mergeRecords(recs);
+      changed.forEach(id => Store.markDirty(id));
+      commit(changed.length ? `Imported ${changed.length} new or updated records.` : "Nothing new in that backup.");
+    } else importOld(old);
+  }catch(err){ say(err.message); }
+};
+function oldFromCSV(rows){
+  const h = rows[0], idx = Object.fromEntries(h.map((c, i) => [c, i])), out = { batteries:[], events:[], legacyCycles:[] };
+  rows.slice(1).forEach((r, n) => {
+    const g = k => r[idx[k]] ?? "";
+    if(g("recordType") === "event"){ const e = { id:g("id"), batteryId:g("batteryId"), date:g("date"), kind:g("kind"), created:n, notes:g("notes") }; if(g("minutes") !== "") e.minutes = Number(g("minutes")); if(g("aircraft")) e.aircraft = g("aircraft"); out.events.push(e); }
+    if(g("recordType") === "legacy") out.legacyCycles.push({ batteryId:g("batteryId"), death:g("death") || null, minutes:g("cycleMinutes") === "" ? null : Number(g("cycleMinutes")) });
+  });
+  return out;
+}
+/* Previous app version: its built-in history had the years one too early; the corrected
+   history is already built in here, so only its own events are brought across. */
+async function importOld(old){
+  const have = live("fitted", "died");
+  const exists = (type, b, date) => have.some(r => r.type === type && r.batteryId === b && r.date === date);
+  const conv = [], flights = [];
+  (old.events || []).forEach(e => {
+    if(!e.date || !e.kind) return;
+    const base = { createdAt:new Date(e.created || Date.now()).toISOString(), source:"old-app", notes:e.notes || "" };
+    if(e.kind === "start" && bat(e.batteryId) && !exists("fitted", e.batteryId, e.date)) conv.push({ ...base, type:"fitted", batteryId:e.batteryId, date:e.date });
+    if(e.kind === "death" && bat(e.batteryId) && !exists("died", e.batteryId, e.date)) conv.push({ ...base, type:"died", batteryId:e.batteryId, date:e.date, notedMinutes:null, oldDayMinutes:null });
+    if(e.kind === "adjust" && bat(e.batteryId) && e.minutes) conv.push({ ...base, type:"adjust", batteryId:e.batteryId, date:e.date, minutes:e.minutes });
+    if(e.kind === "flight" && e.minutes > 0) flights.push(e);
+  });
+  // Old app stored a 412 flight once per fitted battery: keep one per pair
+  const seen = [];
+  flights.sort((a, b) => (a.created || 0) - (b.created || 0)).forEach(e => {
+    const ac = e.aircraft === "B412" ? "B412" : "AW139";
+    const dup = seen.find(s => s.date === e.date && s.aircraft === ac && s.minutes === e.minutes && Math.abs((s._c || 0) - (e.created || 0)) < 50);
+    if(!dup) seen.push({ type:"flight", date:e.date, aircraft:ac, minutes:e.minutes, _c:e.created, source:"old-app", notes:e.notes || "", createdAt:new Date(e.created || Date.now()).toISOString() });
+  });
+  const all = conv.concat(seen);
+  const legacyN = (old.legacyCycles || []).length;
+  if(!await ask(`Old-format backup: ${conv.length} battery events and ${seen.length} flight entries will be added to what's here.\n\nIts ${legacyN} history rows are skipped — the corrected history (years +1) is already built in.\n\nContinue?`)) return;
+  all.forEach(r => { delete r._c; upsert({ ...r, id:uid() }); });
+  commit(`Added ${all.length} entries from the old backup.`);
+}
+
+/* ===================== SYNC SETUP ===================== */
+function showSyncSetup(){
+  document.querySelector('#tabs [data-tab="log"]').click();
+  $("syncCard").scrollIntoView({ behavior:"smooth" });
+  $("syncUrl").focus();
+}
+$("syncBtn").onclick = () => Store.configured ? Store.syncNow() : showSyncSetup();
+$("syncSetupLink").onclick = showSyncSetup;
+$("syncNowBtn").onclick = () => Store.configured ? Store.syncNow() : say("Set up sync first: paste the script URL and passphrase above.");
+$("syncSave").onclick = async () => {
+  const url = $("syncUrl").value.trim(), pass = $("syncPass").value || (url === Store.sync.url ? Store.sync.pass : "");
+  if(!/^https?:\/\/\S+$/.test(url)){ say("Paste the full web app URL from Apps Script. It starts with https://script.google.com/ and ends with /exec."); return; }
+  if(!pass){ say("Enter the passphrase you set in the script's properties."); return; }
+  const b = $("syncSave"); b.disabled = true; b.textContent = "Checking…";
+  try{ await Store.call({ op:"ping" }, url, pass); }
+  catch(e){ b.disabled = false; b.textContent = "Save and sync"; say("Couldn't connect. " + (e instanceof TypeError ? "Check the URL and that this device is online." : e.message)); return; }
+  b.disabled = false; b.textContent = "Save and sync";
+  // Start from scratch with the sheet: send everything here, then pull everything there
+  Store.sync = { url, pass, cursor:0, lastSync:null, outbox:state.records.map(r => r.id) };
+  Store.error = null; Store.saveSync(); $("syncPass").value = ""; $("syncPass").placeholder = "Saved on this device";
+  renderSyncStatus();
+  await Store.syncNow();
+  render();
+  toast(Store.error ? "Sync is on, but the first sync didn't finish. It will retry." : "Sync is on.");
+};
+$("syncOff").onclick = async () => {
+  if(!await ask("Turn off sync on this device?\n\nYour data stays here, and the Google Sheet keeps its copy.", "Turn off")) return;
+  Store.sync = { url:"", pass:"", cursor:0, lastSync:null, outbox:[] }; Store.error = null; Store.saveSync();
+  $("syncUrl").value = ""; $("syncPass").value = ""; $("syncPass").placeholder = "The passphrase you set in the script";
+  renderSyncStatus();
+};
+
+/* ===================== TABS & START ===================== */
+document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  ["home","results","logbook","log"].forEach(t => $("tab-" + t).classList.toggle("hidden", t !== b.dataset.tab));
+  if(b.dataset.tab === "results") drawChart();
+  window.scrollTo(0, 0);
+});
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if(!$("tab-results").classList.contains("hidden")) drawChart(); }, 150); });
+bindQuick(document);
+
+(async function start(){
+  state = await Store.load();
+  if(!state || !Array.isArray(state.records)) state = { schema:3, records:[] };
+  state.records = normalizeIds(state.records);
+  ensureSeeds().forEach(id => Store.markDirty(id));
+  Store.localSave(state); Store.saveSync();
+  $("mDate").value = todayStr(); $("oDate").value = todayStr();
+  $("syncUrl").value = Store.sync.url;
+  if(Store.configured) $("syncPass").placeholder = "Saved on this device";
+  Store.onStatus = renderSyncStatus;
+  Store.onRemote = () => render();
+  render();
+  // Pull other devices' changes on open, when the page comes back into view, and when back online
+  Store.syncNow();
+  document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") Store.syncNow(); });
+  window.addEventListener("online", () => Store.syncNow());
+  window.addEventListener("offline", () => { Store.error = "offline"; renderSyncStatus(); });
+  if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(() => {});
+})();
+</script>
+</body>
+</html>
